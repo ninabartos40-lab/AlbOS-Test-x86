@@ -1,61 +1,28 @@
 # AlbOS Test x86
 
-This repository is a public prototype project for an experimental Android-based x86 test environment named AlbOS Test.
+AlbOS Test is an experimental prototype project exploring an Android-based x86 test environment.
 
-Important note:
-- This is not a final or official AlbOS operating system build.
-- This repository currently contains the project documentation and setup concept for a VM-based testing environment.
-- The purpose is to provide a demonstration/test foundation for exploring an Android x86 virtual machine that can be named and used as "AlbOS Test".
+## Run the current prototype on Windows
+
+1. Download this repository ZIP and extract it.
+2. Double-click `run-albos-test.bat`, or open `index.html` in a browser.
+3. Try Tester Mode, the simulated checks, and the generated demo beep.
+
+The current prototype is a local browser-based interface. It is **not** Android, a bootable ISO, a VM image, or a full operating system. It does not install software or modify Windows. The beep is synthesized by the browser and is not a Nokia/Zedge recording.
 
 ## Project goal
-Provide an x86-compatible virtual machine prototype that can run an Android-based environment for testing, UI experiments, compatibility checks, and system preview.
 
-## Minimum idea
-- Platform: x86
-- Base system: Android-based x86 image
-- VM software: VirtualBox or VMware
-- Purpose: testing and demonstration
-- Name: AlbOS Test
+The longer-term goal is to create an x86 virtual-machine test environment branded as AlbOS Test, based on a compatible Android x86 system and clearly identified as a prototype.
 
-## Recommended VM setup
-- OS type: Linux / Other Linux (64-bit)
-- Memory: 2 GB to 4 GB RAM
-- CPU: 2 cores
-- Storage: 16 GB to 32 GB dynamic disk
-- Virtualization: enabled if supported by the host machine
+## Current contents
 
-## Device concept
-This project is intended to test a lightweight Android-based environment inspired by the AlbOS concept. It is designed as a proof-of-concept test system rather than a production ROM.
+- `index.html` — interactive AlbOS Test UI prototype.
+- `run-albos-test.bat` — opens the prototype in the default browser on Windows.
 
-## Compatibility note
-The project is intended only for testing and demo purposes. Actual compatibility depends on:
-- host hardware
-- virtualization support
-- Android x86 image version
-- CPU and GPU support
-- storage and memory available on the host
+## VM concept
 
-## Default naming
-- VM name: AlbOS Test
-- Device model idea: AlbOS Test VM
-- System label: AlbOS Test
-
-## What this repository includes
-At the moment, this repository focuses on documentation and concept setup only.
-
-Future work may include:
-- VirtualBox setup guide
-- Android x86 installation instructions
-- testing notes
-- compatibility checklist
-- custom app prototype for AlbOS Tester
-- additional project documentation
+A real Android x86 VM requires a separately sourced system image and a build/customization process. This repository does not currently contain or redistribute such an image. Any third-party OS images and components must be used according to their respective licenses.
 
 ## Status
-Prototype / concept repository
 
-## Licensing note
-Use any third-party Android x86 images or components only under their respective licenses. This project itself is intended as a concept repository and should not claim to include or redistribute proprietary ROM assets unless explicitly licensed.
-
-## Disclaimer
-This repository does not claim to provide a complete or official AlbOS OS build. It is a test-oriented experimental project only.
+Early prototype. No bootable AlbOS image is available in this repository yet.

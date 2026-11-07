@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101420">
+  <title>AlbOS Test</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101420; --card:#1d2333; --text:#f0f3fa; --muted:#aeb9cd; --accent:#8da5ff; --green:#77d6a0; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(ellipse at top,#273454,var(--bg) 62%); color:var(--text); font:16px system-ui, sans-serif; }
+    main { width:min(820px,100%); margin:auto; padding:32px 18px 56px; }
+    header { padding:18px 4px 24px; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.14em; font-size:.78rem; font-weight:700; }
+    h1 { font-size:clamp(2.4rem,8vw,4rem); margin:.2em 0; letter-spacing:-.05em; }
+    h2 { font-size:1.15rem; margin:0 0 12px; }
+    p { color:var(--muted); line-height:1.55; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+    section { background:var(--card); padding:18px; border:1px solid #ffffff12; border-radius:18px; box-shadow:0 12px 32px #0002; }
+    .status { display:flex; align-items:center; gap:9px; color:var(--green); font-weight:650; }
+    .dot { width:9px; height:9px; border-radius:50%; background:currentColor; box-shadow:0 0 12px currentColor; }
+    button { border:0; border-radius:12px; background:var(--accent); color:#101420; padding:11px 15px; font:inherit; font-weight:700; cursor:pointer; }
+    button.secondary { background:#39445e; color:var(--text); }
+    button:focus-visible { outline:3px solid white; outline-offset:3px; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid #ffffff12; }
+    .row:last-child { border-bottom:0; }
+    output, #report { color:var(--muted); }
+    #report { white-space:pre-line; min-height:72px; }
+    select { background:#101420; border:1px solid #59647a; color:var(--text); padding:9px; border-radius:9px; max-width:55%; }
+    .notice { margin-top:16px; border-left:3px solid var(--accent); padding:10px 13px; background:#ffffff08; border-radius:0 10px 10px 0; }
+    footer { color:var(--muted); font-size:.85rem; padding:22px 4px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Prototip demonstrativ · x86 concept</div>
+    <h1>AlbOS Test</h1>
+    <p>Un prototip de interfață pentru conceptul AlbOS. Explorează ecranul de test și verificările simulate.</p>
+    <div class="status"><span class="dot" aria-hidden="true"></span> Prototip pornit în browser</div>
+  </header>
+  <div class="grid">
+    <section>
+      <h2>Tester Mode</h2>
+      <p>Activează modul demonstrativ pentru a vedea starea lui.</p>
+      <div class="row"><span>Mod tester</span><button id="tester" class="secondary" aria-pressed="false">Dezactivat</button></div>
+      <div class="row"><span>Versiune demo</span><output>0.1.0</output></div>
+    </section>
+    <section>
+      <h2>Sunet demo</h2>
+      <p>Alege o etichetă de ton. Nu sunt incluse sau copiate fișiere audio de la Nokia/Zedge.</p>
+      <div class="row"><label for="tone">Ton selectat</label>
+        <select id="tone"><option>AlbOS Classic (demo)</option><option>Retro Beep (demo)</option><option>OG Phone Ring (demo)</option></select>
+      </div>
+      <button id="preview" class="secondary" type="button">Previzualizează beep-ul demo</button>
+    </section>
+    <section>
+      <h2>Verificări simulate</h2>
+      <p>Aceste verificări nu certifică compatibilitatea cu un sistem Android.</p>
+      <button id="run" type="button">Rulează testul</button>
+      <div id="report" role="status" aria-live="polite">Apasă butonul pentru a genera raportul demo.</div>
+    </section>
+    <section>
+      <h2>Ce este acesta?</h2>
+      <p>O interfață de test care rulează local în browser. Nu este Android, nu este ISO bootabil și nu schimbă sistemul Windows.</p>
+      <div class="notice">Pentru un VM Android x86 real este necesară o imagine de sistem Android compatibilă și un proces separat de personalizare AlbOS.</div>
+    </section>
+  </div>
+  <footer>AlbOS Test · proiect experimental · fără colectare de date</footer>
+</main>
+<script>
+  const tester = document.querySelector('#tester');
+  tester.addEventListener('click', () => {
+    const enabled = tester.getAttribute('aria-pressed') !== 'true';
+    tester.setAttribute('aria-pressed', String(enabled));
+    tester.textContent = enabled ? 'Activat' : 'Dezactivat';
+    tester.classList.toggle('secondary', !enabled);
+  });
+  document.querySelector('#run').addEventListener('click', () => {
+    document.querySelector('#report').textContent = [
+      'Test demo: terminat cu succes',
+      'Interfață: disponibilă',
+      'Tester Mode: ' + (tester.getAttribute('aria-pressed') === 'true' ? 'activ' : 'inactiv'),
+      'Ton selectat: ' + document.querySelector('#tone').value,
+      'Compatibilitate Android: neverificată (simulare locală)'
+    ].join('\n');
+  });
+  document.querySelector('#preview').addEventListener('click', async () => {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square'; osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+      osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + 0.18);
+      osc.onended = () => ctx.close();
+    } catch { alert('Redarea audio nu este disponibilă în acest browser.'); }
+  });
+</script>
+</body>
+</html>
