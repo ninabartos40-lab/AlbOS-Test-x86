@@ -2,7 +2,15 @@
 
 Un concept de interfață AlbOS cu aspect de telefon, care rulează în browser. Nu este versiune desktop de PC, Android, ISO bootabil sau ROM instalabil.
 
-## Deschidere
+## ROM-ul AlbOS
+
+ROM-ul publicat este disponibil în repository-ul AlbOS, în pagina oficială de release:
+
+**[Descarcă AlbOS 1.2 — albos-main.4.zip](https://github.com/ninabartos40-lab/albos/releases/tag/%23albos)**
+
+Fișierul ROM nu este copiat în acest repository de prototip; descarcă-l din release-ul sursă. Verifică instrucțiunile și compatibilitatea pentru modelul exact al telefonului în [ghidul de instalare](https://github.com/ninabartos40-lab/albos/blob/main/INSTALLATION.md). Nu flash-ui un ROM dacă nu ai confirmat modelul și varianta dispozitivului.
+
+## Deschidere prototip
 
 Descarcă ZIP-ul repository-ului, extrage-l și deschide `index.html` în Edge, Chrome sau Firefox. Pe PC, interfața apare într-un cadru de telefon; pe ecran mobil se adaptează la dimensiunea disponibilă.
 
