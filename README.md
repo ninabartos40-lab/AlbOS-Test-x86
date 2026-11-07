@@ -1,16 +1,16 @@
-# AlbOS Test Web
+# AlbOS Test Web — prototip mobil
 
-AlbOS Test Web este o machetă interactivă de desktop, deschisă local într-un browser. Nu este ISO, Android sau un sistem de operare instalabil.
+Un concept de interfață AlbOS cu aspect de telefon, care rulează în browser. Nu este versiune desktop de PC, Android, ISO bootabil sau ROM instalabil.
 
-## Pornire
+## Deschidere
 
-Descarcă ZIP-ul repository-ului și deschide `index.html` în Edge, Chrome sau Firefox. Nu necesită instalare sau internet.
+Descarcă ZIP-ul repository-ului, extrage-l și deschide `index.html` în Edge, Chrome sau Firefox. Pe PC, interfața apare într-un cadru de telefon; pe ecran mobil se adaptează la dimensiunea disponibilă.
 
-## În prototip
+## Ecrane și aplicații demo
 
-- Desktop cu meniu de aplicații, dock, ceas și ferestre mutabile/maximizabile.
-- Manager de fișiere demonstrativ (nu accesează fișierele reale ale PC-ului).
-- Note salvate local în browser, calculator, terminal simulat și browser offline demonstrativ.
-- Setări simple de accent și beep generat de browser.
+- Ecran de blocare cu ceas și ecran principal cu aplicații.
+- Panou rapid cu setări simulate și fundaluri schimbabile.
+- Telefon și mesaje demonstrative, galerie cu ilustrații CSS, player cu beep sintetizat.
+- Browser offline demonstrativ, ceas, setări și ecran „Despre AlbOS”.
 
-Toate aplicațiile sunt simulări web. Nu rulează comenzi de sistem, nu instalează programe și nu colectează date. AlbOS Test Web nu este un ROM custom și nu bootează într-un VM.
+Acestea sunt interacțiuni de prototip în browser. Aplicațiile nu efectuează apeluri, nu trimit mesaje, nu accesează fotografii sau fișiere și nu navighează pe internet. Notificările și comenzile sunt simulate. Nu colectează date; preferința de fundal se salvează local în browser.
