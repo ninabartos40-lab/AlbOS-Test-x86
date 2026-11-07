@@ -3,100 +3,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101420">
-  <title>AlbOS Test</title>
+  <meta name="theme-color" content="#10131c">
+  <title>AlbOS Test Web</title>
   <style>
-    :root { color-scheme: dark; --bg:#101420; --card:#1d2333; --text:#f0f3fa; --muted:#aeb9cd; --accent:#8da5ff; --green:#77d6a0; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; background:radial-gradient(ellipse at top,#273454,var(--bg) 62%); color:var(--text); font:16px system-ui, sans-serif; }
-    main { width:min(820px,100%); margin:auto; padding:32px 18px 56px; }
-    header { padding:18px 4px 24px; }
-    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.14em; font-size:.78rem; font-weight:700; }
-    h1 { font-size:clamp(2.4rem,8vw,4rem); margin:.2em 0; letter-spacing:-.05em; }
-    h2 { font-size:1.15rem; margin:0 0 12px; }
-    p { color:var(--muted); line-height:1.55; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
-    section { background:var(--card); padding:18px; border:1px solid #ffffff12; border-radius:18px; box-shadow:0 12px 32px #0002; }
-    .status { display:flex; align-items:center; gap:9px; color:var(--green); font-weight:650; }
-    .dot { width:9px; height:9px; border-radius:50%; background:currentColor; box-shadow:0 0 12px currentColor; }
-    button { border:0; border-radius:12px; background:var(--accent); color:#101420; padding:11px 15px; font:inherit; font-weight:700; cursor:pointer; }
-    button.secondary { background:#39445e; color:var(--text); }
-    button:focus-visible { outline:3px solid white; outline-offset:3px; }
-    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid #ffffff12; }
-    .row:last-child { border-bottom:0; }
-    output, #report { color:var(--muted); }
-    #report { white-space:pre-line; min-height:72px; }
-    select { background:#101420; border:1px solid #59647a; color:var(--text); padding:9px; border-radius:9px; max-width:55%; }
-    .notice { margin-top:16px; border-left:3px solid var(--accent); padding:10px 13px; background:#ffffff08; border-radius:0 10px 10px 0; }
-    footer { color:var(--muted); font-size:.85rem; padding:22px 4px; }
+    :root{font-family:Inter,"Segoe UI",system-ui,sans-serif;color:#f5f6fb;background:#111522;font-synthesis:none;--glass:#171b28e8;--line:#ffffff20;--muted:#b7bfd1;--accent:#8ea2ff;--blur:18px}
+    *{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;background:#111522}button,input,textarea{font:inherit}button{color:inherit;cursor:pointer}
+    .desktop{height:100vh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 68% 28%,#5765af 0,transparent 28%),radial-gradient(ellipse at 32% 75%,#a24e86 0,transparent 34%),linear-gradient(135deg,#171b36,#292350 48%,#151c32)}
+    .desktop:before,.desktop:after{content:"";position:absolute;inset:auto;pointer-events:none;border-radius:50%;filter:blur(1px)}.desktop:before{width:64vw;height:64vw;right:-20vw;top:-37vw;border:1px solid #ffffff20;box-shadow:0 0 0 5vw #ffffff08,0 0 0 10vw #ffffff06}.desktop:after{width:55vw;height:55vw;left:-32vw;bottom:-41vw;border:1px solid #ffffff25;box-shadow:0 0 0 5vw #ffffff08,0 0 0 10vw #ffffff05}
+    .topbar{height:38px;position:absolute;z-index:20;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#11131bd9;backdrop-filter:blur(var(--blur));border-bottom:1px solid #ffffff12;font-size:13px}.brand{font-weight:750;letter-spacing:.02em}.top-right{display:flex;align-items:center;gap:15px;color:#e5e9f4}.pill{border:0;background:transparent;padding:5px 8px;border-radius:8px}.pill:hover{background:#ffffff16}
+    .workspace{position:absolute;inset:38px 0 78px;padding:20px;z-index:1}.desktop-icons{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:90px}.desk-icon{width:78px;min-height:76px;border:1px solid transparent;border-radius:13px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;font-size:12px;text-shadow:0 1px 5px #000}.desk-icon:hover,.desk-icon:focus{background:#ffffff18;border-color:#ffffff20;outline:none}.icon{font-size:27px;line-height:1}
+    .welcome{position:absolute;right:5vw;top:15%;width:min(360px,45vw);text-align:right;text-shadow:0 2px 15px #161126}.welcome small{color:#e2dfff;letter-spacing:.15em;text-transform:uppercase}.welcome h1{font-size:clamp(38px,6vw,76px);line-height:.95;margin:12px 0;letter-spacing:-.07em}.welcome p{color:#e2e4f2;margin:0}
+    .dock-wrap{position:absolute;z-index:30;bottom:12px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 20px)}.dock{display:flex;gap:8px;align-items:center;padding:8px 11px;background:#151824ce;border:1px solid #ffffff25;border-radius:20px;backdrop-filter:blur(var(--blur));box-shadow:0 12px 40px #07091470}.dock button{width:47px;height:47px;border:0;border-radius:13px;background:#ffffff0b;font-size:24px;position:relative;transition:transform .15s,background .15s}.dock button:hover{transform:translateY(-5px);background:#ffffff20}.dock button.active:after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:#c9d2ff;bottom:3px;left:50%;transform:translateX(-50%)}
+    .window{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,calc(100vw - 28px));height:min(460px,calc(100vh - 135px));min-height:250px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #ffffff30;border-radius:15px;background:#171a24f5;backdrop-filter:blur(22px);box-shadow:0 24px 80px #05061099}.window.hidden{display:none}.window.maximized{inset:48px 12px 82px;width:auto;height:auto;transform:none}.titlebar{height:43px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#ffffff0a;border-bottom:1px solid #ffffff16;cursor:move}.titlebar strong{font-size:13px}.win-actions{display:flex;gap:7px}.win-actions button{width:25px;height:25px;border:0;border-radius:50%;background:#ffffff16}.win-actions .close{background:#e66a70}.window-body{flex:1;overflow:auto;padding:17px}.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.app-card{min-height:112px;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff13;padding:15px;display:flex;flex-direction:column;gap:9px;text-align:left}.app-card:hover{background:#ffffff18}.app-card span:first-child{font-size:26px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.settings-row,.file-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 4px;border-bottom:1px solid #ffffff12}.action{border:1px solid #ffffff22;background:#ffffff12;border-radius:9px;padding:8px 12px}.action:hover{background:#ffffff25}.accent-btn{background:var(--accent);border:0;color:#131627;font-weight:700;border-radius:9px;padding:9px 13px}.note{width:100%;height:230px;resize:vertical;color:#f3f4fa;background:#11141e;border:1px solid #ffffff1f;border-radius:10px;padding:12px;outline:none}.terminal{background:#090b11;border-radius:10px;padding:14px;color:#b9f4c9;font:13px/1.6 ui-monospace,monospace;min-height:180px}.terminal input{width:75%;border:0;outline:0;background:transparent;color:#fff;font:inherit}.calc{max-width:300px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:auto}.calc output{grid-column:1/-1;text-align:right;font-size:28px;padding:12px;background:#0f121a;border-radius:10px}.calc button{padding:14px;border:0;border-radius:10px;background:#ffffff14}.toast{position:absolute;z-index:50;top:52px;left:50%;transform:translateX(-50%);padding:10px 16px;background:#171a24ed;border:1px solid var(--line);border-radius:11px;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}.start-menu{position:absolute;z-index:35;bottom:82px;left:50%;transform:translateX(-50%);width:min(430px,calc(100vw - 24px));padding:16px;background:#171a24ed;border:1px solid #ffffff28;border-radius:18px;backdrop-filter:blur(24px);box-shadow:0 18px 55px #0008}.start-menu.hidden{display:none}.search{width:100%;padding:11px 13px;border-radius:10px;background:#ffffff10;border:1px solid #ffffff1b;color:white;margin-bottom:12px;outline:0}.menu-apps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.menu-apps button{border:0;border-radius:10px;background:transparent;padding:11px 5px;display:flex;flex-direction:column;align-items:center;gap:5px}.menu-apps button:hover{background:#ffffff15}.menu-apps span{font-size:23px}.disclaimer{position:absolute;z-index:2;right:18px;bottom:18px;font-size:11px;color:#ffffffa8;text-shadow:0 1px 4px #000}
+    @media(max-width:600px){.topbar{padding:0 9px}.top-right{gap:4px}.workspace{padding:12px}.welcome{top:25%;right:7%;width:75vw}.welcome h1{font-size:48px}.dock{gap:4px;padding:6px}.dock button{width:41px;height:43px}.disclaimer{display:none}.window{height:min(450px,calc(100vh - 145px))}}
   </style>
 </head>
 <body>
-<main>
-  <header>
-    <div class="eyebrow">Prototip demonstrativ · x86 concept</div>
-    <h1>AlbOS Test</h1>
-    <p>Un prototip de interfață pentru conceptul AlbOS. Explorează ecranul de test și verificările simulate.</p>
-    <div class="status"><span class="dot" aria-hidden="true"></span> Prototip pornit în browser</div>
-  </header>
-  <div class="grid">
-    <section>
-      <h2>Tester Mode</h2>
-      <p>Activează modul demonstrativ pentru a vedea starea lui.</p>
-      <div class="row"><span>Mod tester</span><button id="tester" class="secondary" aria-pressed="false">Dezactivat</button></div>
-      <div class="row"><span>Versiune demo</span><output>0.1.0</output></div>
+<div class="desktop" id="desktop">
+  <header class="topbar"><button class="pill brand" id="startButton" aria-expanded="false">◈ AlbOS Test</button><div class="top-right"><span id="dateLabel"></span><button class="pill" id="soundButton" title="Sunet demo">🔊</button><button class="pill" id="powerButton" title="Închide prototipul">⏻</button><span id="clock"></span></div></header>
+  <main class="workspace">
+    <div class="desktop-icons">
+      <button class="desk-icon" data-app="files"><span class="icon">📁</span>Fișiere</button>
+      <button class="desk-icon" data-app="notes"><span class="icon">📝</span>Note</button>
+      <button class="desk-icon" data-app="settings"><span class="icon">⚙️</span>Setări</button>
+      <button class="desk-icon" data-app="about"><span class="icon">ⓘ</span>Despre AlbOS</button>
+    </div>
+    <div class="welcome"><small>prototip web · versiunea 0.2</small><h1>Bun venit<br>în AlbOS</h1><p>Un desktop demonstrativ care rulează în browser.</p></div>
+    <section class="window hidden" id="window" aria-label="Fereastră aplicație">
+      <div class="titlebar" id="titlebar"><strong id="windowTitle">Aplicație</strong><div class="win-actions"><button id="minimizeButton" aria-label="Minimizează">−</button><button id="maximizeButton" aria-label="Maximizează">□</button><button class="close" id="closeButton" aria-label="Închide">×</button></div></div>
+      <div class="window-body" id="windowBody"></div>
     </section>
-    <section>
-      <h2>Sunet demo</h2>
-      <p>Alege o etichetă de ton. Nu sunt incluse sau copiate fișiere audio de la Nokia/Zedge.</p>
-      <div class="row"><label for="tone">Ton selectat</label>
-        <select id="tone"><option>AlbOS Classic (demo)</option><option>Retro Beep (demo)</option><option>OG Phone Ring (demo)</option></select>
-      </div>
-      <button id="preview" class="secondary" type="button">Previzualizează beep-ul demo</button>
-    </section>
-    <section>
-      <h2>Verificări simulate</h2>
-      <p>Aceste verificări nu certifică compatibilitatea cu un sistem Android.</p>
-      <button id="run" type="button">Rulează testul</button>
-      <div id="report" role="status" aria-live="polite">Apasă butonul pentru a genera raportul demo.</div>
-    </section>
-    <section>
-      <h2>Ce este acesta?</h2>
-      <p>O interfață de test care rulează local în browser. Nu este Android, nu este ISO bootabil și nu schimbă sistemul Windows.</p>
-      <div class="notice">Pentru un VM Android x86 real este necesară o imagine de sistem Android compatibilă și un proces separat de personalizare AlbOS.</div>
-    </section>
-  </div>
-  <footer>AlbOS Test · proiect experimental · fără colectare de date</footer>
-</main>
+  </main>
+  <div class="dock-wrap"><nav class="dock" aria-label="Aplicații"><button data-app="launcher" title="Aplicații">◈</button><button data-app="files" title="Fișiere">📁</button><button data-app="browser" title="Browser demo">🌐</button><button data-app="notes" title="Note">📝</button><button data-app="calculator" title="Calculator">🧮</button><button data-app="settings" title="Setări">⚙️</button></nav></div>
+  <div class="start-menu hidden" id="startMenu"><input class="search" id="appSearch" placeholder="Caută aplicații…" aria-label="Caută aplicații"><div class="menu-apps" id="menuApps"></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="disclaimer">AlbOS Test Web — interfață demo, nu sistem de operare</div>
+</div>
 <script>
-  const tester = document.querySelector('#tester');
-  tester.addEventListener('click', () => {
-    const enabled = tester.getAttribute('aria-pressed') !== 'true';
-    tester.setAttribute('aria-pressed', String(enabled));
-    tester.textContent = enabled ? 'Activat' : 'Dezactivat';
-    tester.classList.toggle('secondary', !enabled);
-  });
-  document.querySelector('#run').addEventListener('click', () => {
-    document.querySelector('#report').textContent = [
-      'Test demo: terminat cu succes',
-      'Interfață: disponibilă',
-      'Tester Mode: ' + (tester.getAttribute('aria-pressed') === 'true' ? 'activ' : 'inactiv'),
-      'Ton selectat: ' + document.querySelector('#tone').value,
-      'Compatibilitate Android: neverificată (simulare locală)'
-    ].join('\n');
-  });
-  document.querySelector('#preview').addEventListener('click', async () => {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'square'; osc.frequency.value = 880;
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
-      osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + 0.18);
-      osc.onended = () => ctx.close();
-    } catch { alert('Redarea audio nu este disponibilă în acest browser.'); }
-  });
+  const $=s=>document.querySelector(s), win=$('#window'), body=$('#windowBody'), title=$('#windowTitle'), menu=$('#startMenu');
+  const apps=[['files','📁','Fișiere'],['browser','🌐','Browser demo'],['notes','📝','Note'],['calculator','🧮','Calculator'],['settings','⚙️','Setări'],['terminal','⌨️','Terminal demo'],['about','ⓘ','Despre AlbOS']];
+  let toastTimer, calcValue='0', calcFirst=null, calcOp=null, fresh=true;
+  function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2300)}
+  function openApp(id){menu.classList.add('hidden');win.classList.remove('hidden');win.classList.remove('maximized');$('.dock [data-app="'+id+'"]')?.classList.add('active');
+    const app=apps.find(x=>x[0]===id); title.textContent=app?app[2]:'Aplicații';
+    if(id==='launcher'){body.innerHTML='<p class="muted">Alege o aplicație demonstrativă.</p><div class="app-grid">'+apps.map(a=>`<button class="app-card" data-open="${a[0]}"><span>${a[1]}</span><strong>${a[2]}</strong><small class="muted">Deschide aplicația</small></button>`).join('')+'</div>';body.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openApp(b.dataset.open));return}
+    if(id==='about'){body.innerHTML='<h2>AlbOS Test Web</h2><p class="muted">Versiunea 0.2 · prototip de interfață</p><p>Acesta este un desktop demonstrativ construit cu HTML, CSS și JavaScript. Rulează local în browser și nu este Android, ISO bootabil sau un sistem de operare instalabil.</p><div class="settings-row"><span>Stare</span><strong>Prototip activ</strong></div><div class="settings-row"><span>Date salvate</span><span>Doar local în browser</span></div>';return}
+    if(id==='files'){body.innerHTML='<p class="muted">Acesta este un manager de fișiere simulat. Nu accesează fișierele calculatorului tău.</p><div class="file-row"><span>📁</span><strong>Documente</strong><span class="muted">Folder demo</span></div><div class="file-row"><span>🖼️</span><strong>Imagini</strong><span class="muted">Folder demo</span></div><div class="file-row"><span>🎵</span><strong>Muzică</strong><span class="muted">Folder demo</span></div><div class="file-row"><span>⬇️</span><strong>Descărcări</strong><span class="muted">Folder demo</span></div>';return}
+    if(id==='notes'){body.innerHTML='<p class="muted">Notițele se salvează local în browserul acesta.</p><textarea class="note" id="noteText" placeholder="Scrie o notiță…"></textarea><p><button class="action" id="saveNote">Salvează nota</button> <span class="muted" id="noteStatus"></span></p>';const n=$('#noteText');n.value=localStorage.getItem('albos-note')||'';$('#saveNote').onclick=()=>{localStorage.setItem('albos-note',n.value);$('#noteStatus').textContent='Salvat local ✓'};return}
+    if(id==='settings'){body.innerHTML='<h2>Setări rapide</h2><div class="settings-row"><span>Accent interfață</span><button class="action" id="accentButton">Schimbă culoarea</button></div><div class="settings-row"><span>Aspect</span><span>Întunecat</span></div><div class="settings-row"><span>Sunete</span><button class="action" id="settingsSound">Redă beep demo</button></div><p class="muted">Setările sunt doar pentru prototipul din browser.</p>';$('#accentButton').onclick=()=>{const colors=['#8ea2ff','#70d6b1','#f0a2ce','#ffbd70'];const root=document.documentElement;let i=Number(localStorage.getItem('albos-accent-index')||0);i=(i+1)%colors.length;root.style.setProperty('--accent',colors[i]);localStorage.setItem('albos-accent-index',i);};$('#settingsSound').onclick=beep;return}
+    if(id==='browser'){body.innerHTML='<p class="muted">Browser demonstrativ — nu navighează pe internet.</p><div class="settings-row"><span>AlbOS Home</span><span>albos.test</span></div><div style="padding:28px;text-align:center"><div style="font-size:48px">🌐</div><h2>Bun venit în Browser demo</h2><p class="muted">Această pagină este o simulare offline.</p><button class="accent-btn" id="browserToast">Verifică conexiunea</button></div>';$('#browserToast').onclick=()=>toast('Browser demo: fără conexiune web');return}
+    if(id==='calculator'){body.innerHTML='<div class="calc"><output id="calcOutput">0</output>'+['7','8','9','÷','4','5','6','×','1','2','3','−','C','0','=','+'].map(v=>`<button data-calc="${v}">${v}</button>`).join('')+'</div>';body.querySelectorAll('[data-calc]').forEach(b=>b.onclick=()=>calc(b.dataset.calc));return}
+    if(id==='terminal'){body.innerHTML='<p class="muted">Terminal demo: comenzile sunt simulate și nu rulează pe calculator.</p><div class="terminal" id="term"><div>AlbOS Test Web [demo]</div><div>Scrie help pentru comenzile disponibile.</div><div>$ <input id="termInput" aria-label="Comandă demo" autocomplete="off"></div></div>';const inp=$('#termInput');inp.onkeydown=e=>{if(e.key==='Enter'){const val=inp.value.trim();const line=document.createElement('div');line.textContent='$ '+val;inp.parentElement.before(line);const res=document.createElement('div');res.textContent=val==='help'?'Comenzi demo: help, date, clear, about':val==='date'?new Date().toLocaleString('ro-RO'):val==='about'?'AlbOS Test Web — simulare în browser':val==='clear'?'':`Comandă demo necunoscută: ${val}`;inp.parentElement.before(res);inp.value='';$('#term').scrollTop=$('#term').scrollHeight}};return}
+  }
+  function calc(v){const out=$('#calcOutput');if(v==='C'){calcValue='0';calcFirst=null;calcOp=null;fresh=true}else if('+-×÷'.includes(v)){calcFirst=Number(calcValue);calcOp=v;fresh=true}else if(v==='='){const b=Number(calcValue);if(calcOp){const r=calcOp==='+'?calcFirst+b:calcOp==='−'?calcFirst-b:calcOp==='×'?calcFirst*b:(b?calcFirst/b:NaN);calcValue=Number.isFinite(r)?String(Number(r.toFixed(8))):'Eroare';calcFirst=null;calcOp=null;fresh=true}}else{calcValue=fresh?v:(calcValue==='0'?v:calcValue+v);fresh=false}out.textContent=calcValue}
+  function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=740;g.gain.setValueAtTime(.07,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.17);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.17);o.onended=()=>c.close()}catch{toast('Audio indisponibil în browser')}}
+  document.querySelectorAll('[data-app]').forEach(b=>b.addEventListener('click',()=>b.dataset.app==='launcher'?(menu.classList.toggle('hidden'),$('#startButton').setAttribute('aria-expanded',String(!menu.classList.contains('hidden')))):openApp(b.dataset.app)));
+  $('#menuApps').innerHTML=apps.map(a=>`<button data-menu-app="${a[0]}"><span>${a[1]}</span>${a[2]}</button>`).join('');$('#menuApps').querySelectorAll('button').forEach(b=>b.onclick=()=>openApp(b.dataset.menuApp));
+  $('#appSearch').oninput=e=>$('#menuApps').querySelectorAll('button').forEach(b=>b.hidden=!b.textContent.toLowerCase().includes(e.target.value.toLowerCase()));
+  $('#startButton').onclick=()=>{menu.classList.toggle('hidden');$('#startButton').setAttribute('aria-expanded',String(!menu.classList.contains('hidden')))};
+  $('#closeButton').onclick=()=>{win.classList.add('hidden');document.querySelectorAll('.dock button').forEach(x=>x.classList.remove('active'))};$('#minimizeButton').onclick=()=>win.classList.add('hidden');$('#maximizeButton').onclick=()=>win.classList.toggle('maximized');$('#soundButton').onclick=beep;$('#powerButton').onclick=()=>toast('AlbOS Test Web rulează în browser — poți închide fila.');
+  document.querySelectorAll('.desk-icon').forEach(b=>b.ondblclick=()=>openApp(b.dataset.app));document.querySelectorAll('.desk-icon').forEach(b=>b.onclick=()=>{document.querySelectorAll('.desk-icon').forEach(x=>x.style.background='');b.style.background='#ffffff20'});
+  const bar=$('#titlebar');let drag=null;bar.onpointerdown=e=>{if(e.target.closest('.win-actions')||win.classList.contains('maximized'))return;const r=win.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top};bar.setPointerCapture(e.pointerId)};bar.onpointermove=e=>{if(!drag)return;win.style.left=(e.clientX-drag.x+win.offsetWidth/2)+'px';win.style.top=(e.clientY-drag.y+win.offsetHeight/2)+'px';win.style.transform='translate(-50%,-50%)'};bar.onpointerup=()=>drag=null;
+  function updateClock(){const d=new Date();$('#clock').textContent=d.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'});$('#dateLabel').textContent=d.toLocaleDateString('ro-RO',{weekday:'short',day:'numeric',month:'short'})}updateClock();setInterval(updateClock,15000);
+  const accent=Number(localStorage.getItem('albos-accent-index')||0),colors=['#8ea2ff','#70d6b1','#f0a2ce','#ffbd70'];document.documentElement.style.setProperty('--accent',colors[accent%colors.length]);
 </script>
 </body>
 </html>
