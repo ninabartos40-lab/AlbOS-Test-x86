@@ -1,28 +1,42 @@
 # AlbOS Test x86
 
-AlbOS Test is an experimental prototype project exploring an Android-based x86 test environment.
+**Acum există un flux real de pornire într-un VM**, nu doar interfața HTML. Pe Windows, scriptul de configurare descarcă ISO-ul oficial Android-x86 9.0-r2, creează un VM VirtualBox numit `AlbOS Test` și îl pornește.
 
-## Run the current prototype on Windows
+## Pornire pe Windows
 
-1. Download this repository ZIP and extract it.
-2. Double-click `run-albos-test.bat`, or open `index.html` in a browser.
-3. Try Tester Mode, the simulated checks, and the generated demo beep.
+1. Instalează [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) și asigură-te că virtualizarea hardware (Intel VT-x/AMD-V) este activată.
+2. Descarcă ZIP-ul acestui repository și extrage-l într-un folder cu suficient spațiu liber (cel puțin 2 GB pentru ISO și 25 GB pentru discul virtual).
+3. Dublu-click pe `setup-albos-test.bat`.
+4. Așteaptă descărcarea ISO-ului. Scriptul creează un VM cu 4 GB RAM, 2 procesoare virtuale și un disc virtual de 24 GB, apoi îl pornește.
+5. În meniul Android-x86, alege **Live CD - Run Android-x86 without installation** pentru a-l testa. Pentru instalare în discul virtual, alege opțiunea de instalare Android-x86 din meniul de boot și urmează programul de instalare.
 
-The current prototype is a local browser-based interface. It is **not** Android, a bootable ISO, a VM image, or a full operating system. It does not install software or modify Windows. The beep is synthesized by the browser and is not a Nokia/Zedge recording.
+La prima pornire este necesară conexiune la internet pentru descărcarea ISO-ului de la proiectul Android-x86. ISO-ul este mare. Verifică sursa și licențele componentelor upstream.
 
-## Project goal
+## Ce este și ce nu este
 
-The longer-term goal is to create an x86 virtual-machine test environment branded as AlbOS Test, based on a compatible Android x86 system and clearly identified as a prototype.
+- Acesta pornește un **sistem Android-x86 real, bootabil, într-un VM VirtualBox**.
+- VM-ul se numește `AlbOS Test`, dar sistemul de bază este Android-x86 9.0-r2. **Nu este încă un build Android personalizat AlbOS**; nu pretindem că am creat un ROM nou.
+- `index.html` rămâne doar o machetă de interfață, nu sistemul de operare.
+- Scriptul nu modifică Windows și nu instalează sistemul pe discul fizic. Instalarea selectată în meniul Android-x86 este către discul virtual al VM-ului.
 
-## Current contents
+## Fișiere
 
-- `index.html` — interactive AlbOS Test UI prototype.
-- `run-albos-test.bat` — opens the prototype in the default browser on Windows.
+- `setup-albos-test.bat` — pornitor Windows pentru configurare.
+- `setup-albos-test.ps1` — descarcă ISO-ul upstream, creează VM-ul și îl pornește.
+- `index.html` — machetă de interfață web, opțională.
 
-## VM concept
+ISO-ul și discul virtual sunt descărcate/generate local și excluse din Git; repository-ul nu conține fișierele binare mari.
 
-A real Android x86 VM requires a separately sourced system image and a build/customization process. This repository does not currently contain or redistribute such an image. Any third-party OS images and components must be used according to their respective licenses.
+## Probleme obișnuite
 
-## Status
+- **VirtualBox nu este găsit:** instalează VirtualBox și rulează din nou scriptul.
+- **Virtualizare dezactivată:** activează Intel VT-x/AMD-V în BIOS/UEFI și verifică setările Windows/Hyper-V.
+- **VM-ul există deja:** șterge VM-ul `AlbOS Test` din VirtualBox (inclusiv fișierele VM, dacă nu mai ai nevoie de ele) înainte de a rula scriptul din nou.
+- Pentru a relua doar ISO-ul, șterge `android-x86_64-9.0-r2.iso` și pornește scriptul din nou.
 
-Early prototype. No bootable AlbOS image is available in this repository yet.
+## Sursă
+
+- Pagina oficială de descărcare Android-x86: https://www.android-x86.org/download
+- ISO utilizat de script: Android-x86 9.0-r2, găzduit pe SourceForge: https://sourceforge.net/projects/android-x86/files/Release%209.0/android-x86_64-9.0-r2.iso/download
+
+Acesta este un prototip experimental. Compatibilitatea grafică, audio și de rețea depinde de PC și de VirtualBox.
